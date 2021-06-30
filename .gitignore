@@ -4,6 +4,7 @@
 /*
 !instamac-calculator/
 !.gitignore
+!instamac-calculator.zip
 
 # Ignore node_modules
 instamac-calculator/assets/node_modules
