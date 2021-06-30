@@ -67,41 +67,41 @@ Contents:		OPTIONS PAGES
 	
 
 	// FIELD LOCATION SETTINGS
-	// function instarmac_field_locations() {
-
-	// 	// CALCULATOR LOCATIONS
-	// 	$locations		=	get_field( 'instacalc_settings_posttype', 'option' );
-	// 	$location		=	array();
-
-	// 	if ( $locations ) {
-
-	// 		foreach ( $locations as $loc ) {
-
-	// 			$location[]		=	array(
-	// 				array(
-	// 					'param'			=>	'post_type',
-	// 					'operator'		=>	'==',
-	// 					'value'			=>	$loc,
-	// 				),
-	// 			);
-
-	// 		}
-
-	// 	}
-
-	// 	return $location;
-
-	// }
-	
-	// FIELD LOCATION SETTINGS
 	function instarmac_field_location() {
 
-		// CALCULATOR LOCATION
-		$location		=	get_field( 'instacalc_settings_posttype', 'option' );
+		// CALCULATOR LOCATIONS
+		$locations		=	get_field( 'instacalc_settings_posttype', 'option' );
+		$location		=	array();
+
+		if ( $locations ) {
+
+			foreach ( $locations as $loc ) {
+
+				$location[]		=	array(
+					array(
+						'param'			=>	'post_type',
+						'operator'		=>	'==',
+						'value'			=>	$loc,
+					),
+				);
+
+			}
+
+		}
 
 		return $location;
 
 	}
+	
+	// FIELD LOCATION SETTINGS
+	// function instarmac_field_location() {
+
+	// 	// CALCULATOR LOCATION
+	// 	$location		=	get_field( 'instacalc_settings_posttype', 'option' );
+
+	// 	return $location;
+
+	// }
 
 
 /***************\
@@ -128,37 +128,37 @@ Contents:		OPTIONS PAGES
 					),
 
 					// POST TYPES
-					// array(
-					// 	'key'				=>	'field_instacalc_settings_posttype',
-					// 	'label'				=>	'Post Types',
-					// 	'name'				=>	'instacalc_settings_posttype',
-					// 	'instructions'		=>	'Which post types to display calculators on',
-					// 	'type'				=>	'select',
-					// 	'ui'				=>	1,
-					// 	'allow_null'		=>	1,
-					// 	'multiple'			=>	1,
-					// 	'choices'			=>	instarmac_posttype_dropdown_options(),
-					// 	'wrapper'			=>	array (
-					// 		'width'		=>	'50',
-					// 		'class'		=>	'',
-					// 		'id'		=>	'',
-					// 	),
-					// ),
-
-					// POST TYPE
 					array(
 						'key'				=>	'field_instacalc_settings_posttype',
-						'label'				=>	'Post Type',
+						'label'				=>	'Post Types',
 						'name'				=>	'instacalc_settings_posttype',
 						'instructions'		=>	'Which post types to display calculators on',
-						'type'				=>	'text',
-						'placeholder'		=>	'',
+						'type'				=>	'select',
+						'ui'				=>	1,
+						'allow_null'		=>	1,
+						'multiple'			=>	1,
+						'choices'			=>	instarmac_posttype_dropdown_options(),
 						'wrapper'			=>	array (
 							'width'		=>	'50',
 							'class'		=>	'',
 							'id'		=>	'',
 						),
 					),
+
+					// POST TYPE
+					// array(
+					// 	'key'				=>	'field_instacalc_settings_posttype',
+					// 	'label'				=>	'Post Type',
+					// 	'name'				=>	'instacalc_settings_posttype',
+					// 	'instructions'		=>	'Which post types to display calculators on',
+					// 	'type'				=>	'text',
+					// 	'placeholder'		=>	'',
+					// 	'wrapper'			=>	array (
+					// 		'width'		=>	'50',
+					// 		'class'		=>	'',
+					// 		'id'		=>	'',
+					// 	),
+					// ),
 
 					// MAIN CALCULATOR TITLE
 					array(
@@ -401,7 +401,7 @@ Contents:		OPTIONS PAGES
 					),
 
 				),
-				'location'				=>	instarmac_field_locations(),
+				'location'				=>	instarmac_field_location(),
 				'menu_order'			=>	-1,
 				'position'				=>	'side',
 				'style'					=>	'default',
