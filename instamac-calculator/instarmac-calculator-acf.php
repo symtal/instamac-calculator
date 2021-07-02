@@ -402,8 +402,8 @@ function instarmac_add_acf_fields()
 add_action('acf/init', 'instarmac_add_acf_fields');
 
 
-add_filter('acf/get_field_group', 'my_modify_field_group_function');
-function my_modify_field_group_function($group)
+add_filter('acf/load_field_group', 'dynamic_location');
+function dynamic_location($group)
 {
 	if ($group['key'] != 'group_instacalc_sidebar') {
 		// not our field group
