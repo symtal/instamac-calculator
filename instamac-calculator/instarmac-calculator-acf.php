@@ -11,11 +11,10 @@ Contents:		OPTIONS PAGES
 
 
 /***************\
- * OPTIONS PAGES *
+* OPTIONS PAGES *
 \***************/
 
-function instarmac_add_options_pages()
-{
+function instarmac_add_options_pages() {
 
 	// CALCULATORS
 	$args		=	array(
@@ -31,6 +30,7 @@ function instarmac_add_options_pages()
 	);
 
 	acf_add_options_page($args);
+
 }
 
 // UNCOMMMENT THE NEXT LINE TO CREATE THE OPTIONS PAGES
@@ -38,41 +38,44 @@ add_action('init', 'instarmac_add_options_pages');
 
 
 /******************\
- * CUSTOM FUNCTIONS *
+* CUSTOM FUNCTIONS *
 \******************/
 
 // POST TYPE DROPDOWN OPTIONS
-function instarmac_posttype_dropdown_options($field)
-{
-	$post_types = get_post_types(array('public' => true), 'object');
+function instarmac_posttype_dropdown_options( $field ) {
 
-	// reset choices
-	$field['choices'] = array();
+	$post_types			=	get_post_types( array( 'public' => true ), 'object' );
 
-	foreach ($post_types as $type) :
+	// RESET CHOICES
+	$field['choices']	=	array();
 
-		if (in_array($type->name, array('attachment'))) :
+	foreach ( $post_types as $type ) {
+
+		if ( in_array( $type->name, array('attachment') ) ) :
 			continue;
 		endif;
-		$field['choices'][$type->name] = $type->label;
-	endforeach;
+
+		$field['choices'][ $type->name ] = $type->label;
+
+	}
 
 	return $field;
+
 }
 
 add_filter('acf/load_field/name=instacalc_settings_posttype', 'instarmac_posttype_dropdown_options');
 
+
 // FIELD LOCATION SETTINGS
-function instarmac_field_location()
-{
+function instarmac_field_location() {
 
 	// CALCULATOR LOCATIONS
 	$locations		=	get_field('instacalc_settings_posttype', 'option');
 	$location		=	array();
 
-	if ($locations) {
+	if ( $locations ) {
 
-		foreach ($locations as $loc) {
+		foreach ( $locations as $loc ) {
 
 			$location[]		=	array(
 				array(
@@ -81,33 +84,20 @@ function instarmac_field_location()
 					'value'			=>	$loc,
 				),
 			);
+
 		}
+
 	}
 
 	return $location;
 }
 
 
-
-// if (!function_exists('add_post_types_to_list')) {
-
-// FIELD LOCATION SETTINGS
-// function instarmac_field_location() {
-
-// 	// CALCULATOR LOCATION
-// 	$location		=	get_field( 'instacalc_settings_posttype', 'option' );
-
-// 	return $location;
-
-// }
-
-
 /***************\
- * CUSTOM FIELDS *
+* CUSTOM FIELDS *
 \***************/
 
-function instarmac_add_acf_fields()
-{
+function instarmac_add_acf_fields() {
 
 	// SETTINGS
 	acf_add_local_field_group(
@@ -402,13 +392,20 @@ function instarmac_add_acf_fields()
 add_action('acf/init', 'instarmac_add_acf_fields');
 
 
-add_filter('acf/load_field_group', 'dynamic_location');
-function dynamic_location($group)
-{
-	if ($group['key'] != 'group_instacalc_sidebar') {
-		// not our field group
+// DYNAMIC LOCATION FOR SIDEBAR
+function instarmac_dynamic_location( $group ) {
+
+	if ( 'group_instacalc_sidebar' != $group['key'] ) {
+
+		// NOT OUR GROUP
 		return $group;
+
 	}
-	$group['location'] = instarmac_field_location();
+
+	$group['location']	=	instarmac_field_location();
+
 	return $group;
+
 }
+
+add_filter('acf/load_field_group', 'instarmac_dynamic_location');
