@@ -2,7 +2,7 @@
 		<div class="rw">
 
 			<label class="cl50">
-				Linear Metres <span>m</span><br>
+				Linear Metres <span>meters</span><br>
 				<input type="number" id="metre-type-7" value="0" onkeyup="calculateLinearJoint();" onchange="calculateLinearJoint();">
 			</label>
 

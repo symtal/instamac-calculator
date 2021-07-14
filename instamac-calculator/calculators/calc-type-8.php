@@ -2,7 +2,7 @@
 		<div class="rw">
 
 			<label class="cl50">
-				Area <span>m&sup2;</span><br>
+				Area <span>meters sq.</span><br>
 				<input type="number" id="area-type-8" value="0" onkeyup="calculateTile();" onchange="calculateTile();">
 			</label>
 
